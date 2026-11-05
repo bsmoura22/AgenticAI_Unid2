@@ -1,0 +1,149 @@
+{
+  "always_available": ["sal", "água", "pimenta"],
+  "recipes": {
+    "omelete_queijo": {
+      "name": "Omelete de Queijo",
+      "time": 10,
+      "servings": 2,
+      "ingredients": {
+        "ovo": {"qty": 2, "unit": "unidade"},
+        "queijo": {"qty": 50, "unit": "g"},
+        "azeite": {"qty": 15, "unit": "ml"},
+        "sal": {"qty": 1, "unit": "pitada"}
+      },
+      "steps": [
+        "Bata os ovos com sal.",
+        "Aqueça o azeite em frigideira antiaderente.",
+        "Despeje os ovos e cozinhe em fogo médio.",
+        "Adicione o queijo e dobre ao meio."
+      ]
+    },
+    "panqueca": {
+      "name": "Panqueca",
+      "time": 20,
+      "servings": 4,
+      "ingredients": {
+        "farinha": {"qty": 100, "unit": "g"},
+        "leite": {"qty": 200, "unit": "ml"},
+        "ovo": {"qty": 1, "unit": "unidade"},
+        "azeite": {"qty": 15, "unit": "ml"},
+        "açúcar": {"qty": 15, "unit": "g"},
+        "sal": {"qty": 1, "unit": "pitada"}
+      },
+      "steps": [
+        "Misture farinha, açúcar e sal.",
+        "Adicione ovo, leite e azeite; bata até homogeneizar.",
+        "Aqueça frigideira antiaderente.",
+        "Despeje porções e vire quando a superfície firmar."
+      ]
+    },
+    "macarrao_alho_oleo": {
+      "name": "Macarrão ao Alho e Óleo",
+      "time": 30,
+      "servings": 2,
+      "ingredients": {
+        "macarrão": {"qty": 200, "unit": "g"},
+        "alho": {"qty": 3, "unit": "dente"},
+        "azeite": {"qty": 45, "unit": "ml"},
+        "salsinha": {"qty": 1, "unit": "maço"},
+        "sal": {"qty": 1, "unit": "pitada"}
+      },
+      "steps": [
+        "Cozinhe o macarrão al dente.",
+        "Fatie o alho e refogue no azeite até dourar.",
+        "Misture o macarrão com o refogado.",
+        "Adicione salsinha picada e sirva."
+      ]
+    },
+    "vitamina_banana": {
+      "name": "Vitamina de Banana",
+      "time": 5,
+      "servings": 2,
+      "ingredients": {
+        "banana": {"qty": 2, "unit": "unidade"},
+        "leite": {"qty": 200, "unit": "ml"},
+        "açúcar": {"qty": 15, "unit": "g"}
+      },
+      "steps": [
+        "Descasque as bananas.",
+        "Bata no liquidificador com leite e açúcar."
+      ]
+    },
+    "bolo_cenoura": {
+      "name": "Bolo de Cenoura",
+      "time": 60,
+      "servings": 8,
+      "ingredients": {
+        "cenoura": {"qty": 3, "unit": "unidade"},
+        "farinha": {"qty": 200, "unit": "g"},
+        "açúcar": {"qty": 200, "unit": "g"},
+        "ovo": {"qty": 3, "unit": "unidade"},
+        "azeite": {"qty": 100, "unit": "ml"},
+        "fermento": {"qty": 10, "unit": "g"}
+      },
+      "steps": [
+        "Bata no liquidificador cenoura, ovos e azeite.",
+        "Misture farinha e açúcar na batedeira.",
+        "Adicione o fermento e misture levemente.",
+        "Asse em forno a 180 °C por 40 minutos."
+      ]
+    },
+    "sopa_legumes": {
+      "name": "Sopa de Legumes",
+      "time": 40,
+      "servings": 4,
+      "ingredients": {
+        "batata": {"qty": 2, "unit": "unidade"},
+        "cenoura": {"qty": 2, "unit": "unidade"},
+        "cebola": {"qty": 1, "unit": "unidade"},
+        "alho": {"qty": 2, "unit": "dente"},
+        "abobrinha": {"qty": 1, "unit": "unidade"},
+        "caldo": {"qty": 1000, "unit": "ml"},
+        "sal": {"qty": 1, "unit": "pitada"}
+      },
+      "steps": [
+        "Pique todos os legumes.",
+        "Refogue cebola e alho no azeite.",
+        "Adicione os demais legumes e o caldo.",
+        "Cozinhe por 30 minutos em fogo médio."
+      ]
+    }
+  },
+  "substitutions": [
+    {
+      "recipe_id": "panqueca",
+      "ingredient": "leite",
+      "substitute": "leite de aveia",
+      "ratio": "1:1",
+      "note": "Mesma quantidade"
+    },
+    {
+      "recipe_id": "bolo_cenoura",
+      "ingredient": "azeite",
+      "substitute": "manteiga",
+      "ratio": "1:1",
+      "note": "Derreta antes de usar"
+    },
+    {
+      "recipe_id": "macarrao_alho_oleo",
+      "ingredient": "salsinha",
+      "substitute": "manjericão",
+      "ratio": "1:0.5",
+      "note": "Use metade da quantidade"
+    },
+    {
+      "recipe_id": "omelete_queijo",
+      "ingredient": "queijo",
+      "substitute": "ricota",
+      "ratio": "1:1",
+      "note": "Mesma quantidade"
+    },
+    {
+      "recipe_id": "vitamina_banana",
+      "ingredient": "leite",
+      "substitute": "leite de coco",
+      "ratio": "1:1",
+      "note": "Mesma quantidade"
+    }
+  ]
+}

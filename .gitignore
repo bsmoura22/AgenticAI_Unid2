@@ -218,3 +218,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+.streamlit/
+
+# Cursor / IDE local
+.cursor/
+.idea/
+.vscode/
+
+# FridgeChef — índices, caches e dumps locais (não sobem)
+chroma/
+chroma_lab/
+*.sqlite
+
+# Extratos temporários de notebooks (rascunhos locais)
+_nb*.txt
+_extract*.py
+_extract_*.py
+

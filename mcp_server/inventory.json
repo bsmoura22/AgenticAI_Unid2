@@ -1,0 +1,18 @@
+{
+  "ovo": {"qty": 6, "unit": "unidade"},
+  "queijo": {"qty": 100, "unit": "g"},
+  "azeite": {"qty": 200, "unit": "ml"},
+  "leite": {"qty": 500, "unit": "ml"},
+  "farinha": {"qty": 300, "unit": "g"},
+  "açúcar": {"qty": 200, "unit": "g"},
+  "banana": {"qty": 3, "unit": "unidade"},
+  "macarrão": {"qty": 400, "unit": "g"},
+  "alho": {"qty": 5, "unit": "dente"},
+  "salsinha": {"qty": 1, "unit": "maço"},
+  "cenoura": {"qty": 4, "unit": "unidade"},
+  "fermento": {"qty": 20, "unit": "g"},
+  "batata": {"qty": 3, "unit": "unidade"},
+  "cebola": {"qty": 2, "unit": "unidade"},
+  "abobrinha": {"qty": 1, "unit": "unidade"},
+  "caldo": {"qty": 1500, "unit": "ml"}
+}

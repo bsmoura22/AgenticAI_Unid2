@@ -1,0 +1,1 @@
+"""Servidor MCP próprio FridgeChef."""
