@@ -1,11 +1,11 @@
-# FridgeChef Ampliado — Assistente Agêntico de Cozinha Doméstica
+# FridgeChef Plus: Assistente Agêntico de Cozinha, seu sous-chef virtual.
 
 **Disciplina:** Tópicos Especiais em Inteligência Computacional A · Unidade II  
 **Participantes:** Beatriz Santana de Moura e Victor Aguiar Gomes
 
 ## O que o assistente faz e para quem
 
-O **FridgeChef Ampliado** ajuda pessoas que cozinham em casa a:
+O **FridgeChef Plus** ajuda pessoas que cozinham em casa a:
 
 - consultar e atualizar o **estoque** da geladeira;
 - buscar **receitas** realizáveis, **substituições** e **listas de compras**;
@@ -13,7 +13,7 @@ O **FridgeChef Ampliado** ajuda pessoas que cozinham em casa a:
 - consultar **documentos reais** de higiene alimentar e técnica culinária (RAG agêntico);
 - combinar o cardápio com **clima/horário** (servidor MCP da comunidade).
 
-Público-alvo: estudantes e cozinheiros domésticos que querem decisões verificáveis a partir de estoque + guias, não receitas inventadas.
+Público-alvo: estudantes e cozinheiros que querem decisões verificáveis a partir de estoque + guias, não receitas inventadas.
 
 ## Como executar
 
