@@ -1,42 +1,16 @@
-# Guia de substituições de ingredientes na cozinha doméstica
+# Substituições e preparo de receitas
 
-Fonte: consolidação didática a partir de guias públicos de culinária e educação
-alimentar (práticas caseiras amplamente documentadas). Uso educacional FridgeChef · 2026-11.
+Resumo didático, em palavras próprias, de materiais publicados por King Arthur Baking e pelo Ministério da Agricultura, Pecuária e Abastecimento (MAPA), com participação técnica da Embrapa. Proporções e resultados dependem da receita; consulte primeiro as substituições cadastradas no FridgeChef.
 
-## Laticínios
+Fontes:
+- King Arthur Baking, *Non-dairy milk for baking: What's the best choice?* (2024): https://www.kingarthurbaking.com/blog/2024/08/12/best-non-dairy-milk-for-baking
+- King Arthur Baking, *How to bake dairy-free* (2018): https://www.kingarthurbaking.com/blog/2018/05/10/how-to-bake-dairy-free
+- MAPA, *Hortaliças Não-Convencionais (Tradicionais)* (2010), seção “Como obter sucesso no preparo das receitas”, p. 17; equipe técnica inclui Embrapa Hortaliças: https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/857646/1/Cartilha-Hortalicas-nao-convencionais.pdf
 
-| Original | Substituto comum | Proporção | Observação |
-|----------|------------------|-----------|------------|
-| Leite integral | Leite de aveia | 1:1 | Bom em panquecas e vitaminas |
-| Leite integral | Leite de coco | 1:1 | Sabor mais marcado em vitaminas |
-| Queijo mussarela | Ricota | 1:1 | Textura mais úmida na omelete |
-| Manteiga | Azeite | 1:1 (volume) | Em bolos e refogados |
+## Leite em massas e assados
 
-## Farinhas e açúcares
+King Arthur Baking relata que bebidas vegetais podem substituir o leite de vaca na proporção de 1:1 em muitas receitas de forno. Os resultados podem diferir em sabor, cor e textura porque proteínas, gordura e açúcar variam entre bebidas. Para uma panqueca caseira, essa proporção é um ponto de partida, não garantia de resultado idêntico.
 
-Farinha de trigo pode ser parcialmente trocada por aveia em flocos processada,
-mas a textura muda. Açúcar refinado pode ser reduzido em vitaminas sem prejuízo
-grave de estrutura; em bolos, reduzir demais afeta umidade e cor.
+## Substituição responsável
 
-## Ervas e aromáticos
-
-Salsinha fresca pode ser trocada por manjericão (use cerca da metade) ou cebolinha.
-Alho em pó não equivale exatamente a dentes frescos: comece com 1/8 de colher de chá
-por dente e ajuste.
-
-## Ovos em massas
-
-Em panquecas e alguns bolos, substitutos caseiros (ex.: 1 colher de sopa de linhaça
-moída + 3 de água por ovo) alteram liga e cor; use apenas quando necessário e aceite
-textura diferente.
-
-## Quando não substituir sem critério
-
-Fermento químico não tem substituto direto simples em bolos. Gelatina e emulsificantes
-específicos também. Se a receita depende da estrutura (suspiros, merengue), evite trocas
-improvisadas.
-
-## Planejamento de compras após substituição
-
-Anote o substituto escolhido na lista de compras com a quantidade já convertida pela
-proporção. Confira o estoque atual antes de comprar itens que você já tem em casa.
+A cartilha do MAPA orienta conferir os ingredientes e ler a receita antes do preparo. Para substituir, procure produtos com características semelhantes de umidade, amido, açúcar, gordura e fibras. Não suponha que qualquer troca em bolo, massa ou receita com estrutura delicada seja equivalente. Se não houver substituição validada na base ou nos documentos, apresente a incerteza e mantenha o item na lista de compras.

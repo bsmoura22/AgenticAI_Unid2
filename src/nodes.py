@@ -12,7 +12,7 @@ from langchain_openai import ChatOpenAI
 from langgraph.prebuilt import ToolNode
 from pydantic import BaseModel, Field
 
-from src.mcp_client import get_all_tools_sync
+from src.mcp_client import _run_async, get_all_tools_sync
 from src.prompts import build_system_prompt
 from src.rag import retrieve
 from src.skills_loader import load_skill
@@ -34,8 +34,8 @@ OUT_OF_SCOPE_PATTERNS = [
 ]
 
 MEDICAL_LEAK_PATTERNS = [
-    r"\bcure\s+(diabetes|câncer|cancer)\b",
-    r"\bcura\s+(diabetes|câncer|cancer)\b",
+    r"\bcure\s+(for\s+)?(diabetes|câncer|cancer)\b",
+    r"\bcura\s+(do\s+|da\s+|de\s+)?(diabetes|câncer|cancer)\b",
     r"\btome\s+\d+\s*mg\b",
     r"\bdiagnóstico\s+médico\b",
 ]
@@ -153,8 +153,8 @@ def router(state: AgentState) -> dict[str, Any]:
                 content=(
                     "Classifique a intenção do usuário do FridgeChef.\n"
                     "- rag: dúvidas sobre higiene, conservação, técnica culinária, guias.\n"
-                    "- ops: estoque, receitas, substituições cadastradas, compras, plano de refeições.\n"
-                    "- misto: precisa de documentos E operações de estoque/receitas.\n"
+                    "- ops: estoque, receitas, substituições cadastradas, compras, clima, plano de refeições.\n"
+                    "- misto: somente se o pedido exigir explicitamente documentos E operações.\n"
                     "Se mencionar planejar várias refeições, skill_hint=planejar-refeicoes.\n"
                     "Se mencionar falta/substituição/lista de compras, skill_hint=substituir-e-comprar."
                 )
@@ -163,6 +163,11 @@ def router(state: AgentState) -> dict[str, Any]:
         ]
     )
     rag_query = decision.rag_query or user
+    user_lower = user.lower()
+    if any(term in user_lower for term in ("planeje", "planejar", "cardápio", "cardapio", "clima")) and not any(
+        term in user_lower for term in ("higien", "técnic", "tecnic", "document", "guia", "fonte")
+    ):
+        decision.route = "ops"
     updates: dict[str, Any] = {
         "route": decision.route,
         "rag_query": rag_query,
@@ -171,9 +176,6 @@ def router(state: AgentState) -> dict[str, Any]:
         "rag_docs": "",
         "rag_payload": [],
     }
-    if decision.skill_hint in {"planejar-refeicoes", "substituir-e-comprar"}:
-        updates["active_skill"] = load_skill(decision.skill_hint)
-        updates["loaded_skills"] = _extend_skills(state, decision.skill_hint)
     return updates
 
 
@@ -247,7 +249,7 @@ def prefetch_inventory(state: AgentState) -> dict[str, Any]:
         return {"inventory_snapshot": "(estoque indisponível: tool não encontrada)"}
     tool = tools[candidates[0]]
     try:
-        result = tool.invoke({})
+        result = _run_async(tool.ainvoke({}))
     except Exception as exc:  # noqa: BLE001
         return {"inventory_snapshot": f"(falha ao ler estoque: {exc})"}
     text = result if isinstance(result, str) else json.dumps(result, ensure_ascii=False)
@@ -328,17 +330,9 @@ def build_tool_node() -> ToolNode:
 
 def tools_with_tracking(state: AgentState) -> dict[str, Any]:
     node = build_tool_node()
-    result = node.invoke(state)
-    # ToolNode returns messages; extract tool names from last AI tool_calls
-    names: list[str] = []
-    for msg in reversed(state.get("messages", [])):
-        if isinstance(msg, AIMessage) and msg.tool_calls:
-            names = [tc["name"] for tc in msg.tool_calls]
-            break
-    out = dict(result)
-    if names:
-        out["called_tools"] = _extend_tools(state, *names)
-    return out
+    result = _run_async(node.ainvoke(state))
+    # agent_node já registrou as chamadas; não duplicar o mesmo evento.
+    return dict(result)
 
 
 def finalize(state: AgentState) -> dict[str, Any]:
@@ -377,9 +371,13 @@ def output_guardrail(state: AgentState) -> dict[str, Any]:
                 "Removi conteúdo sensível da resposta (possível vazamento de credenciais). "
                 "Reformule sua pergunta sobre cozinha/estoque."
             )
+            prior = next(
+                (msg for msg in reversed(state.get("messages", [])) if isinstance(msg, AIMessage) and not msg.tool_calls),
+                None,
+            )
             return {
                 "final_answer": safe,
-                "messages": [AIMessage(content=safe)],
+                "messages": [AIMessage(content=safe, id=prior.id if prior else None)],
                 "guardrail_reason": "vazamento",
             }
     for pat in MEDICAL_LEAK_PATTERNS:
@@ -388,9 +386,13 @@ def output_guardrail(state: AgentState) -> dict[str, Any]:
                 "Não forneço orientações médicas ou de tratamento. "
                 "Posso ajudar com receitas, estoque e higiene alimentar geral."
             )
+            prior = next(
+                (msg for msg in reversed(state.get("messages", [])) if isinstance(msg, AIMessage) and not msg.tool_calls),
+                None,
+            )
             return {
                 "final_answer": safe,
-                "messages": [AIMessage(content=safe)],
+                "messages": [AIMessage(content=safe, id=prior.id if prior else None)],
                 "guardrail_reason": "risco_medico",
             }
     return {"final_answer": answer}

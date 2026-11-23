@@ -9,9 +9,10 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import AIMessage, HumanMessage
 
 from src.graph import build_graph
+from src.nodes import output_guardrail
 
 
 def main():
@@ -35,6 +36,18 @@ def main():
         result.get("final_answer") or ""
     ).lower()
     print("OK guardrail entrada:", result.get("guardrail_reason"), result.get("final_answer"))
+
+    for unsafe, reason in (
+        ("A cura do diabetes é uma receita.", "risco_medico"),
+        ("OPENAI_API_KEY=sk-12345678901234567890", "vazamento"),
+    ):
+        checked = output_guardrail(
+            {"messages": [AIMessage(content=unsafe, id="unsafe")], "final_answer": unsafe}
+        )
+        assert checked["guardrail_reason"] == reason
+        assert unsafe not in checked["final_answer"]
+        assert checked["messages"][0].id == "unsafe"
+        print("OK guardrail saída:", reason)
 
 
 if __name__ == "__main__":

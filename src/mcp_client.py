@@ -1,4 +1,4 @@
-"""Cliente MCP: servidor próprio FridgeChef + servidor da comunidade."""
+"""Cliente MCP: servidor próprio FridgeChef + Open Meteo da comunidade."""
 
 from __future__ import annotations
 
@@ -17,7 +17,9 @@ load_dotenv()
 
 def _servers_config() -> dict:
     own = os.getenv("MCP_OWN_URL", "http://127.0.0.1:8000/mcp")
-    community = os.getenv("MCP_COMMUNITY_URL", "http://127.0.0.1:8001/mcp")
+    community = os.getenv(
+        "MCP_COMMUNITY_URL", "https://open-meteo.caseyjhand.com/mcp"
+    )
     return {
         "fridgechef": {
             "url": own,
@@ -47,7 +49,17 @@ def make_load_skill_tool() -> BaseTool:
 
 async def _fetch_mcp_tools() -> list[BaseTool]:
     client = MultiServerMCPClient(_servers_config())
-    return await client.get_tools()
+    tools = await client.get_tools()
+    # O servidor público oferece outras capacidades que não pertencem ao domínio.
+    weather_tools = {"openmeteo_search_locations", "openmeteo_get_forecast"}
+    selected = [
+        tool for tool in tools
+        if not tool.name.startswith("openmeteo_") or tool.name in weather_tools
+    ]
+    found = {tool.name for tool in selected}
+    if not weather_tools.issubset(found):
+        raise RuntimeError("O MCP de clima não expôs as tools esperadas: " + ", ".join(sorted(weather_tools - found)))
+    return selected
 
 
 def _run_async(coro):

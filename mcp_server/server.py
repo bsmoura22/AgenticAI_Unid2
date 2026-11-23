@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+import unicodedata
 from pathlib import Path
 
 from fastmcp import FastMCP
@@ -25,6 +26,20 @@ def _always_available() -> set[str]:
 
 def _recipes() -> dict:
     return _load_catalog()["recipes"]
+
+
+def _recipe_id(label: str, recipes: dict) -> str | None:
+    """Aceita id ou nome abreviado somente quando houver uma única correspondência."""
+    def normalize(value: str) -> str:
+        ascii_text = unicodedata.normalize("NFKD", value.casefold())
+        return "".join(char for char in ascii_text if not unicodedata.combining(char)).strip().replace(" ", "_")
+
+    target = normalize(label)
+    exact = [rid for rid, recipe in recipes.items() if target in {normalize(rid), normalize(recipe["name"])}]
+    if len(exact) == 1:
+        return exact[0]
+    partial = [rid for rid, recipe in recipes.items() if target and (target in normalize(rid) or target in normalize(recipe["name"]))]
+    return partial[0] if len(partial) == 1 else None
 
 
 def _substitutions() -> dict[tuple[str, str], dict]:
@@ -202,9 +217,10 @@ def simulate_meal_plan(recipe_ids: str) -> str:
     temp_inv = copy.deepcopy(_load_inventory())
     steps = []
     ids = [x.strip() for x in recipe_ids.split(",") if x.strip()]
-    for rid in ids:
-        if rid not in recipes:
-            steps.append({"recipe_id": rid, "ok": False, "error": "receita não encontrada"})
+    for label in ids:
+        rid = _recipe_id(label, recipes)
+        if rid is None:
+            steps.append({"requested": label, "ok": False, "error": "receita não encontrada ou ambígua"})
             continue
         recipe = recipes[rid]
         missing = []
@@ -221,16 +237,18 @@ def simulate_meal_plan(recipe_ids: str) -> str:
                 }
             )
             continue
+        consumed = {}
         for ing, spec in recipe["ingredients"].items():
             if ing in _always_available():
                 continue
+            consumed[ing] = {"qty": float(spec["qty"]), "unit": spec["unit"]}
             qty = float(temp_inv.get(ing, {}).get("qty", 0.0)) - float(spec["qty"])
             unit = temp_inv.get(ing, {}).get("unit", spec["unit"])
             if qty <= 0:
                 temp_inv.pop(ing, None)
             else:
                 temp_inv[ing] = {"qty": qty, "unit": unit}
-        steps.append({"recipe_id": rid, "name": recipe["name"], "ok": True, "missing": []})
+        steps.append({"recipe_id": rid, "name": recipe["name"], "ok": True, "missing": [], "consumed": consumed})
     return json.dumps(
         {"steps": steps, "inventory_after_simulation": temp_inv},
         ensure_ascii=False,
@@ -281,4 +299,4 @@ def montar_jantar(tempo_max_minutos: int = 30) -> str:
 
 
 if __name__ == "__main__":
-    mcp.run(transport="http", host="0.0.0.0", port=8000, show_banner=False)
+    mcp.run(transport="http", host="127.0.0.1", port=8000, show_banner=False)

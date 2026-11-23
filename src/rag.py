@@ -9,11 +9,20 @@ from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = ROOT / "data" / "docs"
+SOURCE_DOCS_DIR = ROOT / "data" / "source_docs"
 CHROMA_DIR = ROOT / "chroma"
 COLLECTION = "fridgechef_docs"
+
+PDF_SOURCES = (
+    ("cartilha_anvisa.pdf", (11, 23, 31, 32, 33, 34),
+     "https://www.gov.br/anvisa/pt-br/centraisdeconteudo/publicacoes/alimentos/manuais-guias-e-orientacoes/cartilha-boas-praticas-para-servicos-de-alimentacao.pdf/"),
+    ("hortalicas_mapa.pdf", (17,),
+     "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/857646/1/Cartilha-Hortalicas-nao-convencionais.pdf"),
+)
 
 
 def _chunk_id(source: str, index: int, content: str) -> str:
@@ -32,6 +41,24 @@ def load_documents(docs_dir: Path | None = None) -> list[Document]:
                 metadata={"source": path.name, "filename": path.name},
             )
         )
+    if docs_dir == DOCS_DIR:
+        for filename, page_indexes, url in PDF_SOURCES:
+            path = SOURCE_DOCS_DIR / filename
+            reader = PdfReader(path)
+            for page_index in page_indexes:
+                content = reader.pages[page_index].extract_text() or ""
+                if content.strip():
+                    documents.append(
+                        Document(
+                            page_content=content,
+                            metadata={
+                                "source": filename,
+                                "filename": filename,
+                                "page": page_index + 1,
+                                "url": url,
+                            },
+                        )
+                    )
     return documents
 
 
@@ -50,7 +77,7 @@ def make_chunks(
         parts = splitter.split_text(doc.page_content)
         for i, part in enumerate(parts):
             meta = dict(doc.metadata)
-            meta["chunk_id"] = _chunk_id(meta["source"], i, part)
+            meta["chunk_id"] = _chunk_id(f"{meta['source']}:{meta.get('page', '')}", i, part)
             meta["chunk_index"] = i
             chunks.append(Document(page_content=part, metadata=meta))
     return chunks
@@ -75,6 +102,11 @@ def build_store(
     )
     chunks = make_chunks()
     existing = set(store.get()["ids"] or [])
+    current = {chunk.metadata["chunk_id"] for chunk in chunks}
+    stale = existing - current
+    if stale:
+        store.delete(ids=list(stale))
+        existing -= stale
     to_add_docs: list[Document] = []
     to_add_ids: list[str] = []
     for chunk in chunks:
@@ -109,7 +141,9 @@ def format_docs(documents: list[Document]) -> str:
     for doc in documents:
         source = doc.metadata.get("source", "desconhecido")
         idx = doc.metadata.get("chunk_index", "?")
-        blocks.append(f"[fonte={source} trecho={idx}]\n{doc.page_content}")
+        page = doc.metadata.get("page")
+        location = f" página_pdf={page}" if page else ""
+        blocks.append(f"[fonte={source}{location} trecho={idx}]\n{doc.page_content}")
     return "\n\n".join(blocks)
 
 
@@ -121,6 +155,8 @@ def retrieve(query: str, k: int = 4) -> tuple[str, list[dict]]:
             "content": d.page_content,
             "source": d.metadata.get("source", ""),
             "chunk_index": d.metadata.get("chunk_index"),
+            "page": d.metadata.get("page"),
+            "url": d.metadata.get("url"),
         }
         for d in docs
     ]

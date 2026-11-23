@@ -1,42 +1,19 @@
-# Boas práticas de higiene alimentar na cozinha doméstica
+# Higiene alimentar na cozinha doméstica
 
-Fonte: adaptação didática a partir de orientações públicas da ANVISA
-(Cartilha "Boas Práticas para Serviços de Alimentação" e materiais de educação sanitária)
-e da OMS sobre inocuidade dos alimentos. Acesso de referência: 2026-11.
-Documento compilado para uso educacional no assistente FridgeChef.
+Resumo didático, em palavras próprias, de documentos publicados por instituições de saúde. Consulte os originais para detalhes e para situações fora da cozinha doméstica.
 
-## Higienização das mãos
+Fontes:
+- Anvisa, *Cartilha sobre Boas Práticas para Serviços de Alimentação*, capítulos 5, 9 e 12, pp. 12, 24, 32–35: https://www.gov.br/anvisa/pt-br/centraisdeconteudo/publicacoes/alimentos/manuais-guias-e-orientacoes/cartilha-boas-praticas-para-servicos-de-alimentacao.pdf
+- OMS, *Five Keys to Safer Food Manual* (2006): https://www.who.int/publications/i/item/9789241594639
 
-Lave as mãos com água e sabão antes de manipular alimentos, após tocar carne crua,
-após usar o banheiro e após tocar o lixo. A fricção deve durar pelo menos 20 segundos,
-incluindo espaços entre os dedos e unhas.
+## Mãos, utensílios e contaminação cruzada
 
-## Separação de alimentos crus e prontos
+Lave as mãos antes de preparar alimentos e depois de lidar com carnes cruas ou vegetais não lavados. A cartilha da Anvisa recomenda uma lavagem cuidadosa por mais de 20 segundos. Separe alimentos crus dos já cozidos e lave utensílios que tocaram alimentos crus antes de reutilizá-los em alimentos prontos. A OMS também recomenda manter limpo e separar crus de cozidos.
 
-Use tábuas e facas diferentes para carnes cruas e para vegetais/alimentos prontos.
-Nunca coloque carne cozida na mesma superfície que recebeu carne crua sem higienizar.
-Evite contaminação cruzada guardando carnes cruas na prateleira inferior da geladeira.
+## Temperatura e conservação
 
-## Temperaturas seguras
+A cartilha da Anvisa identifica a faixa de 5 °C a 60 °C como favorável à multiplicação de micróbios. Recomenda geladeira abaixo de 5 °C e alimentos quentes acima de 60 °C em exposição. Para o preparo, orienta cozinhar bem os alimentos, com todas as partes atingindo ao menos 70 °C. Não descongele alimentos à temperatura ambiente; use a geladeira ou micro-ondas quando o preparo for imediato.
 
-Mantenha a geladeira em até 5 °C e o freezer em −18 °C ou menos.
-Alimentos perecíveis não devem ficar mais de 2 horas em temperatura ambiente.
-Reaqueça sobras até atingir pelo menos 70 °C no centro do alimento.
+## Frutas, verduras e legumes consumidos crus
 
-## Conservação de ovos, leite e queijos
-
-Ovos devem ser refrigerados e usados dentro do prazo. Não lave ovos antes de guardar
-(a casca porosa pode absorver umidade e microrganismos); lave apenas antes de usar.
-Leite aberto deve ser consumido em poucos dias sob refrigeração.
-Queijos macios estragam mais rápido que queijos duros; observe odor e textura.
-
-## Frutas, verduras e legumes
-
-Lave em água corrente. Para consumo cru, faça sanitização com solução clorada própria
-para alimentos, conforme instrução do fabricante, e enxágue em seguida.
-Descartar partes danificadas reduz risco de deterioração.
-
-## Sinais de deterioração
-
-Descarte alimentos com odor anormal, slimosidade, mofo visível ou embalagem estufada.
-Na dúvida, não consuma. O congelamento não elimina toxinas já formadas por bactérias.
+Segundo a cartilha da Anvisa, retire partes deterioradas, lave folhas individualmente e frutas e legumes um a um em água corrente. Depois, use solução clorada própria para alimentos conforme o rótulo, enxágue em água corrente e mantenha refrigerado até servir. A cartilha apresenta um exemplo de tempo e diluição, mas a concentração do produto varia: siga o rótulo do sanitizante utilizado.

@@ -8,11 +8,11 @@ description: Use quando o usuário quiser planejar duas ou mais refeições em s
 Siga este fluxo multi-etapa (não pule ferramentas):
 
 1. Confirme o estoque atual com `get_inventory` (ou o snapshot já no contexto).
-2. Se a cidade/clima for relevante, chame `get_weather` ou `meal_timing_tip`.
-3. Escolha candidatas com `search_recipes` (respeite o tempo máximo pedido).
-4. Valide a sequência com `simulate_meal_plan` passando os ids separados por vírgula.
+2. Se a cidade/clima for relevante, chame `openmeteo_search_locations` com `country="BR"`, escolha a cidade correta e use suas coordenadas em `openmeteo_get_forecast` com `current_variables=["temperature_2m", "precipitation"]`. Use o clima para priorizar entre receitas viáveis: em calor forte, prefira opções mais leves; em frio, pratos quentes. Explique essa escolha sem inventar receitas. Se o serviço falhar, informe que o clima está indisponível.
+3. Escolha candidatas com `search_recipes` (respeite o tempo máximo pedido) e use os `recipe_id` retornados.
+4. Valide a sequência com `simulate_meal_plan` passando os ids separados por vírgula. A tool também aceita nomes únicos de receitas cadastradas.
 5. Se algum passo falhar por falta de ingrediente:
    - tente `find_substitution` para o item faltante; ou
    - troque a ordem/receita e simule de novo.
-6. Responda em português com: cardápio final, o que cada refeição consome, e o inventário simulado ao final.
+6. Responda em português com: cardápio final, o que cada refeição consome conforme `steps[].consumed`, e o inventário simulado ao final. Não deduza ingredientes pela memória do modelo.
 7. Não chame `update_inventory` só por planejar — a simulação não altera o estoque real.

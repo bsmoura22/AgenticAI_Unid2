@@ -1,43 +1,15 @@
-# Fundamentos de técnica culinária para cozinha doméstica
+# Técnicas de preparo: panquecas e bolos
 
-Fonte: síntese educacional baseada em práticas clássicas de técnica culinária
-(referências públicas de educação alimentar e manuais introdutórios de gastronomia).
-Compilado para o FridgeChef · 2026-11. Não substitui formação profissional.
+Resumo didático, em palavras próprias, de orientações publicadas pela King Arthur Baking.
 
-## Pontos de cocção de ovos
+Fontes:
+- King Arthur Baking, *I've baked over 18,000 pancakes. Here's how to make your best* (2021): https://www.kingarthurbaking.com/blog/2021/10/26/best-pancake-tips
+- King Arthur Baking, *Cake Guide*: https://www.kingarthurbaking.com/learn/guides/cake
 
-- Omelete: misture ovos apenas até homogeneizar; cozinhe em fogo médio-baixo para
-  não ressecar. Recheios úmidos (queijo) entram no final.
-- Ovo cozido: cerca de 6–7 minutos para gema mole e 9–12 para gema firme após fervura.
-- Clara em neve: recipiente sem gordura; ponto de pico firme sustenta a própria forma.
+## Panquecas
 
-## Massas e farinhas
+Um breve descanso da massa pode melhorar a textura das panquecas. As orientações da King Arthur Baking recomendam ao menos cinco minutos para que a massa engrosse e os agentes de crescimento atuem. Misturar em excesso pode prejudicar a maciez; alguns pequenos grumos são aceitáveis.
 
-Farinha de trigo comum absorve líquidos de forma diferente da integral.
-Para panquecas, a massa deve ficar lisa, sem grumos; descanso de 10 minutos ajuda.
-Macarrão: água em quantidade generosa, salgada; escorra al dente para não amolecer
-ao misturar com molho quente.
+## Bolos
 
-## Refogados e aromáticos
-
-Alho doura rápido: retire do fogo ao primeiro dourado para não amargar.
-Cebola translúcida indica refogado básico pronto. Azeite e óleo aquecem antes dos
-aromáticos; temperos secos entram depois para liberar aroma sem queimar.
-
-## Assados
-
-Forno pré-aquecido garante crescimento uniforme de bolos. Cento e oitenta graus
-Celsius é ponto comum para bolos caseiros; teste com palito seco no centro.
-Formas untadas e enfarinhadas (ou com papel manteiga) evitam aderência.
-
-## Sopas e caldos
-
-Comece pelo refogado, acrescente legumes duros (batata, cenoura) antes dos macios
-(abobrinha). Caldo deve cobrir os ingredientes. Fogo médio por 25–40 minutos
-amacia sem desmanchar demais. Acerte o sal no final.
-
-## Substituições básicas de técnica
-
-- Leite animal → bebidas vegetais (aveia, coco) em vitaminas e massas liquidas, 1:1.
-- Azeite → manteiga derretida em bolos, aproximadamente 1:1 em volume.
-- Ervas frescas → secas em menor quantidade (cerca de um terço), adicionadas mais cedo.
+Pré-aqueça o forno adequadamente. Um termômetro independente ajuda a verificar a temperatura real, pois o indicador do forno pode estar impreciso. Alterar ingredientes ou forma pode mudar tempo de preparo e textura; observe o ponto da receita em vez de assumir que todas assam da mesma maneira.
