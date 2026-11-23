@@ -86,6 +86,10 @@ flowchart TD
   OutGuard --> END2([END])
 ```
 
+O nó `tools` executa as chamadas solicitadas pelo agente; cada ferramenta não é
+um nó separado do LangGraph. O catálogo e a finalidade das ferramentas estão
+na seção [Ferramentas disponíveis](#ferramentas-disponíveis).
+
 ### Função de cada nó
 
 | Nó | Função |
@@ -124,12 +128,43 @@ Receitas e substituições cadastradas vêm do FridgeChef da Unidade I (`data/re
 
 ### MCP próprio (`mcp_server`)
 
-Tools: `get_inventory`, `update_inventory`, `search_recipes`, `find_substitution`, `generate_shopping_list`, `simulate_meal_plan`, `reset_inventory`.  
-Resource: `resource://fridgechef/catalogo`. Prompt: `montar_jantar`.
+O servidor próprio oferece as ferramentas de estoque e receitas. As operações
+`update_inventory` e `reset_inventory` alteram o estoque real; a simulação não.
+
+| Tool | Função |
+|------|--------|
+| `get_inventory` | Lê os itens e quantidades atuais. |
+| `update_inventory` | Adiciona, remove ou define a quantidade de um item no estoque real. |
+| `search_recipes` | Busca receitas possíveis e quase completas, com limite opcional de tempo. |
+| `find_substitution` | Consulta uma substituição cadastrada para ingrediente e receita. |
+| `generate_shopping_list` | Calcula o que falta para uma receita, ajustando as quantidades ao número de porções. |
+| `simulate_meal_plan` | Simula receitas em sequência, verificando o consumo de cada etapa sem modificar o estoque real. |
+| `reset_inventory` | Substitui todo o estoque por um conjunto de itens informado em JSON. |
+
+O servidor também publica o resource `resource://fridgechef/catalogo` e o prompt
+`montar_jantar`; eles não são tools chamadas pelo agente neste grafo.
 
 ### MCP da comunidade (Open Meteo)
 
-Tools: `openmeteo_search_locations` e `openmeteo_get_forecast`. O primeiro resolve a cidade brasileira em coordenadas; o segundo consulta as condições atuais para apoiar sugestões de refeição conforme o clima. Fonte e instalação alternativa: [repositório do servidor](https://github.com/cyanheads/open-meteo-mcp-server). O endpoint é configurável por `MCP_COMMUNITY_URL`.
+| Tool | Função |
+|------|--------|
+| `openmeteo_search_locations` | Localiza a cidade e obtém suas coordenadas. |
+| `openmeteo_get_forecast` | Consulta previsão e condições meteorológicas para orientar a sugestão de refeição. |
+
+Só essas duas tools do servidor público são expostas ao agente. Fonte e
+instalação alternativa: [repositório do servidor](https://github.com/cyanheads/open-meteo-mcp-server).
+O endpoint é configurável por `MCP_COMMUNITY_URL`.
+
+### Ferramentas disponíveis
+
+Além das nove tools MCP acima, o agente recebe a tool local `load_skill`, que
+carrega o texto completo de `planejar-refeicoes` ou `substituir-e-comprar` sob
+demanda. O nó `maybe_load_skill` também pode carregar uma skill antes do agente.
+
+O painel da interface pode mostrar `retrieve_docs` e `rewrite_query` entre as
+ações chamadas. Esses nomes registram, respectivamente, a busca no Chroma e a
+reformulação da consulta nos nós `retrieve` e `rewrite_query`; não são tools MCP
+expostas ao agente.
 
 ### Skills
 
